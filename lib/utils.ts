@@ -1,0 +1,1 @@
+import { clsx,type ClassValue } from "clsx";import { twMerge } from "tailwind-merge";export const cn=(...x:ClassValue[])=>twMerge(clsx(x));export const fmt=(n:number)=>new Intl.NumberFormat("vi-VN",{notation:n>=1000000?"compact":"standard",maximumFractionDigits:1}).format(n);export const pct=(n:number)=>`${n.toLocaleString("vi-VN",{maximumFractionDigits:2})}%`;

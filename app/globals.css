@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --background: 248 250 252; --foreground: 15 23 42; --sidebar: 15 23 42; }
+
+* { border-color: #e5e7eb; }
+html { background: rgb(var(--background)); color: rgb(var(--foreground)); scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: #f8fafc;
+  font-family: Consolas, "Courier New", monospace;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-rendering: optimizeLegibility;
+}
+button, input, select { font: inherit; }
+table, svg text, .recharts-wrapper { font-family: inherit; font-variant-numeric: tabular-nums lining-nums; }
+button, a, select, input { transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+button:active { transform: translateY(1px); }
+:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+select, input[type="date"] { cursor: pointer; }
+.scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+.recharts-cartesian-axis-tick-value { font-size: 11px; fill: #64748b; }
+.recharts-default-tooltip { border: 1px solid #dbeafe !important; border-radius: 8px !important; box-shadow: 0 12px 30px rgba(15,23,42,.1) !important; }
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}

@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Next.js and deployment output
+.next/
+.vercel/
+.wrangler/
+
+# Local secrets
+.env
+.env.local
+.env.*.local
+
+# Generated files
+*.log
+*.tsbuildinfo
+.history/
+.lh/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

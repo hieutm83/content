@@ -1,0 +1,14 @@
+"use client";
+import { useEffect,useState } from "react";
+import dayjs from "dayjs";
+import { useDashboardStore,type Range } from "@/store/dashboard";
+
+type Option={value:string;label:string;start:string;end:string};
+type FilterOptions={weeks:Option[];months:Option[]};
+export function Header({onRefresh:_onRefresh,loading:_loading,total:_total,lastSync:_lastSync}:{onRefresh:()=>void;loading:boolean;total:number;lastSync:string|null}){
+ const s=useDashboardStore(),[options,setOptions]=useState<FilterOptions>({weeks:[],months:[]});
+ useEffect(()=>{let active=true;const load=(force=false):Promise<void>=>fetch(`/api/filter-options${force?"?force=true":""}`).then(r=>r.json()).then(x=>{if(!active)return;if(x.data?.weeks?.length)setOptions(x.data);else if(!force)void load(true)}).catch(()=>{});void load();return()=>{active=false}},[]);
+ const choose=(value:string,items:Option[],kind:"week"|"month")=>{if(kind==="week"){s.setWeek(value);s.setMonth("all")}else{s.setMonth(value);s.setWeek("all")}if(value==="all"){s.setRange("yesterday");return}const option=items.find(x=>x.value===value);if(option)s.setDates(option.start,option.end)};
+ const control="h-9 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 shadow-sm hover:border-brand-300 focus:border-brand-500";
+ return <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 px-4 py-3 backdrop-blur-xl lg:px-6"><div className="ml-12 flex flex-wrap items-center gap-2 lg:ml-0"><span className="mr-1 hidden text-xs font-bold uppercase tracking-wide text-slate-400 xl:inline">Bộ lọc</span><select aria-label="Khoảng thời gian" value={s.range} onChange={e=>{s.setRange(e.target.value as Range);s.setWeek("all");s.setMonth("all")}} className={control}><option value="yesterday">Hôm qua</option><option value="7d">7 ngày</option><option value="30d">30 ngày</option><option value="90d">90 ngày</option><option value="custom">Tùy chọn</option></select>{s.range==="custom"&&<><input aria-label="Từ ngày" type="date" value={s.start||""} onChange={e=>s.setDates(e.target.value,s.end||dayjs().subtract(1,"day").format("YYYY-MM-DD"))} className={control}/><span className="text-slate-300">—</span><input aria-label="Đến ngày" type="date" value={s.end||""} onChange={e=>s.setDates(s.start||e.target.value,e.target.value)} className={control}/></>}<select aria-label="Tuần" value={s.week} onChange={e=>choose(e.target.value,options.weeks,"week")} className={control}><option value="all">Tất cả tuần</option>{options.weeks.map(x=><option key={x.value} value={x.value}>{x.label}</option>)}</select><select aria-label="Tháng" value={s.month} onChange={e=>choose(e.target.value,options.months,"month")} className={control}><option value="all">Tất cả tháng</option>{options.months.map(x=><option key={x.value} value={x.value}>{x.label}</option>)}</select></div></header>
+}

@@ -1,0 +1,5 @@
+import { cn } from "@/lib/utils";
+export function Button({className,...p}:React.ButtonHTMLAttributes<HTMLButtonElement>){return <button className={cn("inline-flex h-9 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border border-slate-200 bg-white px-3 text-sm font-semibold text-slate-700 shadow-sm hover:border-brand-200 hover:bg-brand-50 hover:text-brand-800 disabled:cursor-not-allowed disabled:opacity-50",className)} {...p}/>}
+export function Skeleton({className}: {className?:string}){return <div className={cn("animate-pulse rounded-lg bg-slate-200",className)}/>}
+export function Panel({className,...p}:React.HTMLAttributes<HTMLDivElement>){return <div className={cn("rounded-lg border border-slate-200/90 bg-white shadow-soft",className)} {...p}/>}
+export function Empty({title="Chưa có dữ liệu",description="Hãy thay đổi bộ lọc hoặc đồng bộ dữ liệu mới."}:{title?:string;description?:string}){return <div className="flex min-h-52 flex-col items-center justify-center px-6 text-center"><p className="font-semibold text-slate-800">{title}</p><p className="mt-1 text-sm text-slate-500">{description}</p></div>}
