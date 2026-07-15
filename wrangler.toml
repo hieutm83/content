@@ -4,6 +4,6 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
 [vars]
-LARK_APP_TOKEN = "L89NbJwFAaTvCCsEVmajGVRHpJh"
-LARK_TABLE_ID = "tbl632K3PIw26pvv"
+LARK_APP_TOKEN = "VhAWbo2gia2uKSsLQATjoI9cpje"
+LARK_TABLE_ID = "tblNj0k7qnw3K4xg"
 LARK_VIEW_ID = "vew8E3SU2J"
